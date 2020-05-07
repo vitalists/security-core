@@ -1,5 +1,6 @@
 package com.imooc.security.securitycore.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,17 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BizpageController {
 
-    // 登录
-    @PostMapping("/login")
-    public String index(String username,String password) {
-        return "index";
-    }
 
+    @Value("${spring.security.loginType}")
+    private String loginType;
     // 登录页面
     @GetMapping("/loginPage")
     public String loginpPage() {
-
-        return "public/login";
+        if ("JSON".equalsIgnoreCase(loginType)) {
+            return "public/login_json";
+        }else {
+            return "public/login";
+        }
     }
 
     // 登录成功之后的首页
