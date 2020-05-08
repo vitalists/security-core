@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class SysUserRole implements Serializable {
+public class SysUserRole extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -2,6 +2,9 @@ package com.imooc.security.securitycore.service;
 
 import com.imooc.security.securitycore.entity.SysMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-05-08
  */
 public interface ISysMenuService extends IService<SysMenu> {
-
+    List<String> getAuthorityByRoleCodes(List<String> roleCodes);
 }

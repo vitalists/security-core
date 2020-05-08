@@ -40,11 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 登录页面放行
                 .antMatchers("/login", "/login.html", "/public/**", "/loginPage").permitAll()
-                // biz1 ,biz2 需要 user 或者admin 权限
-                .antMatchers("/biz1", "biz2").hasAnyAuthority("ROLE_user", "ROLE_admin")
-                // syslog , sysuser 需要 admin 角色
-                .antMatchers("/syslog", "/sysuser").hasAnyRole("admin")
-                .anyRequest().authenticated()
+                .anyRequest().access("@rbacService.hasPermission(request,authentication)")
         ;
     }
 
