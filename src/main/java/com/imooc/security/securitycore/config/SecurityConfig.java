@@ -2,6 +2,7 @@ package com.imooc.security.securitycore.config;
 
 import com.imooc.security.securitycore.config.handle.ImoocAuthenticationFailureHandle;
 import com.imooc.security.securitycore.config.handle.ImoocAuthenticationSuccessHandle;
+import com.imooc.security.securitycore.config.imgGenerator.ImgCodeFilter;
 import com.imooc.security.securitycore.config.user.MyUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 @Configuration
@@ -23,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final ImoocAuthenticationFailureHandle imoocAuthenticationFailureHandle;
     private final ImoocAuthenticationSuccessHandle imoocAuthenticationSuccessHandle;
     private  final MyUserDetailsService userDetailsService;
+    private  final ImgCodeFilter imgCodeFilter;
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -45,16 +49,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 登录页面放行
-                .antMatchers("/login", "/login.html", "/public/**", "/loginPage").permitAll()
+                .antMatchers("/index","/login", "/login.html", "/public/**", "/loginPage","/kaptcha").permitAll()
                 .anyRequest().access("@rbacService.hasPermission(request,authentication)")
         ;
         //退出登录
         http.logout().logoutSuccessUrl("/loginPage");
+        http.addFilterBefore(imgCodeFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/fonts/**", "/img/**", "/js/**");
+        web.ignoring().antMatchers("/css/**", "/fonts/**", "/img/**", "/js/**","*.icon","/error","/favicon.ico");
     }
 
     @Override
