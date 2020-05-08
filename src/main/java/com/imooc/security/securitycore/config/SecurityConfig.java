@@ -1,10 +1,8 @@
 package com.imooc.security.securitycore.config;
 
-import com.imooc.security.securitycore.handle.ImoocAuthenticationFailureHandle;
-import com.imooc.security.securitycore.handle.ImoocAuthenticationSuccessHandle;
+import com.imooc.security.securitycore.config.handle.ImoocAuthenticationFailureHandle;
+import com.imooc.security.securitycore.config.handle.ImoocAuthenticationSuccessHandle;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
