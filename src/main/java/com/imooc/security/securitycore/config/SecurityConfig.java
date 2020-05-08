@@ -48,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/login.html", "/public/**", "/loginPage").permitAll()
                 .anyRequest().access("@rbacService.hasPermission(request,authentication)")
         ;
+        //退出登录
+        http.logout().logoutSuccessUrl("/loginPage");
     }
 
     @Override
