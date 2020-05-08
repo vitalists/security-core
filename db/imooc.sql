@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 08/05/2020 15:57:42
+ Date: 08/05/2020 18:50:29
 */
 
 SET NAMES utf8mb4;
@@ -39,7 +39,7 @@ CREATE TABLE `sys_menu`  (
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES (1, 0, '', 0, '', '', '', '', 0, 0, 0);
+INSERT INTO `sys_menu` VALUES (1, 0, '0', 1, 'biz1', '/biz1', '', '', 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for sys_org
@@ -82,6 +82,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
+INSERT INTO `sys_role` VALUES (1, 'admin', '管理员', 'admin', 1, 0, '2020-05-07 17:39:21');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -97,6 +98,7 @@ CREATE TABLE `sys_role_menu`  (
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
+INSERT INTO `sys_role_menu` VALUES (1, 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -133,5 +135,6 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+INSERT INTO `sys_user_role` VALUES (1, 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
