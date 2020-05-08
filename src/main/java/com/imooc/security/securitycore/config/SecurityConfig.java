@@ -2,6 +2,7 @@ package com.imooc.security.securitycore.config;
 
 import com.imooc.security.securitycore.config.handle.ImoocAuthenticationFailureHandle;
 import com.imooc.security.securitycore.config.handle.ImoocAuthenticationSuccessHandle;
+import com.imooc.security.securitycore.config.user.MyUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // 构造器注入
     private final ImoocAuthenticationFailureHandle imoocAuthenticationFailureHandle;
     private final ImoocAuthenticationSuccessHandle imoocAuthenticationSuccessHandle;
+    private  final MyUserDetailsService userDetailsService;
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -55,14 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-                .password(new BCryptPasswordEncoder().encode("user"))
-                .roles("user")
-                .and()
-                .withUser("admin")
-                .password(new BCryptPasswordEncoder().encode("admin"))
-                .roles("admin")
-                .and()
+        auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
+
     }
 }
