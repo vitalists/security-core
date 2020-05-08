@@ -46,11 +46,9 @@ public class MyUserDetailsService implements UserDetailsService {
         if (CollectionUtils.isEmpty(listByUserId)) {
             throw new UsernameNotFoundException("用户角色不存在");
         }
-        List<String> collect = listByUserId.stream().map(role -> "ROLE_" + role).collect(Collectors.toList());
         // 根据角色查按钮权限
         List<String> roleCodes = iSysMenuService.getAuthorityByRoleCodes(listByUserId);
-        collect.addAll(roleCodes);
-
+        listByUserId.addAll(roleCodes);
         MyUserDetails myUserDetails = new MyUserDetails();
         myUserDetails.setPassword(user.getPassword());
         myUserDetails.setUsername(user.getUsername());
