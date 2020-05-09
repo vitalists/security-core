@@ -1,4 +1,4 @@
-package com.imooc.security.securitycore.config.imgGenerator;
+package com.imooc.security.securitycore.config.codeGenerator.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

@@ -1,8 +1,8 @@
 package com.imooc.security.securitycore.config;
 
+import com.imooc.security.securitycore.config.codeGenerator.filter.CodeFilter;
 import com.imooc.security.securitycore.config.handle.ImoocAuthenticationFailureHandle;
 import com.imooc.security.securitycore.config.handle.ImoocAuthenticationSuccessHandle;
-import com.imooc.security.securitycore.config.imgGenerator.ImgCodeFilter;
 import com.imooc.security.securitycore.config.user.MyUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final ImoocAuthenticationFailureHandle imoocAuthenticationFailureHandle;
     private final ImoocAuthenticationSuccessHandle imoocAuthenticationSuccessHandle;
     private  final MyUserDetailsService userDetailsService;
-    private  final ImgCodeFilter imgCodeFilter;
+    private  final CodeFilter codeFilter;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -49,12 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 登录页面放行
-                .antMatchers("/index","/login", "/login.html", "/public/**", "/loginPage","/kaptcha").permitAll()
+                .antMatchers("/smscode","/smslogin","/index","/login", "/login.html", "/public/**", "/loginPage","/kaptcha").permitAll()
                 .anyRequest().access("@rbacService.hasPermission(request,authentication)")
         ;
         //退出登录
         http.logout().logoutSuccessUrl("/loginPage");
-        http.addFilterBefore(imgCodeFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(codeFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

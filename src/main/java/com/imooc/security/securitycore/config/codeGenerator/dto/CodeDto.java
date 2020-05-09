@@ -1,10 +1,11 @@
-package com.imooc.security.securitycore.config.imgGenerator;
+package com.imooc.security.securitycore.config.codeGenerator.dto;
 
 import lombok.Data;
 
 import java.io.Serializable;
 @Data
 public class CodeDto implements Serializable {
+
     private String code;
 
     private Long expireTime;

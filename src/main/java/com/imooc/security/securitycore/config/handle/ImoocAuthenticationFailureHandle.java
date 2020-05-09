@@ -1,7 +1,7 @@
 package com.imooc.security.securitycore.config.handle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.security.securitycore.config.imgGenerator.SessionAuthenticationException;
+import com.imooc.security.securitycore.config.codeGenerator.exception.SessionAuthenticationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
@@ -26,7 +26,7 @@ public class ImoocAuthenticationFailureHandle extends SimpleUrlAuthenticationFai
                 response.getWriter().write(objectMapper.writeValueAsString(exception.getMessage()));
             }
         } else {
-            super.onAuthenticationFailure(request, response, exception);
+            response.sendRedirect("/loginPage");
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.imooc.security.securitycore.config.imgGenerator;
+package com.imooc.security.securitycore.config.codeGenerator.image;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
